@@ -7,7 +7,7 @@ const babel = require('gulp-babel');
 const jade = require('gulp-jade');
 
 gulp.task('jade', () => {
-   return gulp.src('src/templates/index.jade')
+   return gulp.src('src/app/**/*.jade')
       .pipe(jade())
       .pipe(gulp.dest('./'))
       .pipe(browserSync.reload({
@@ -16,7 +16,7 @@ gulp.task('jade', () => {
 });
 
 gulp.task('sass', () => {
-   return gulp.src('src/sass/**/*.scss')
+   return gulp.src('src/app/**/*.scss')
       .pipe(sass())
       .pipe(gulp.dest('dist/css'))
       .pipe(browserSync.reload({
@@ -25,7 +25,7 @@ gulp.task('sass', () => {
 });
 
 gulp.task('babel', () => {
-   return gulp.src('src/js/**/*.js')
+   return gulp.src('src/app/**/*.js')
       .pipe(babel())
       .pipe(gulp.dest('dist/js'));
 });
@@ -41,7 +41,7 @@ gulp.task('browserSync', () => {
 gulp.task('default', ['jade', 'sass', 'babel']);
 
 gulp.task('watch', ['browserSync', 'jade', 'sass', 'babel'], () => {
-   gulp.watch('src/sass/**/*.scss', ['sass']);
-   gulp.watch('src/templates/**/*.jade', ['jade']);
-   gulp.watch('src/scripts/**/*.js', browserSync.reload);
+   gulp.watch('src/app/**/*.scss', ['sass']);
+   gulp.watch('src/app/**/*.jade', ['jade']);
+   gulp.watch('src/app/**/*.js', browserSync.reload);
 });
