@@ -1,20 +1,26 @@
 (function() {
    'use strict';
 
+   //tets
+
    angular
       .module('app.landing')
       .config(configFunction);
 
-      configFunction.$inject = ['$stateProvider', '$urlRouterProvider'];
+      configFunction.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
-      function configFunction($stateProvider, $urlRouterProvider) {
-         $urlRouterProvider.otherwise('/');
+      function configFunction($stateProvider, $urlRouterProvider, $locationProvider) {
 
          $stateProvider
             .state('home', {
                url: '/',
-               templateUrl: 'home.jade'
+               views: {
+                  '': { template: 'home.html' }
+               }
             });
+
+            $urlRouterProvider.otherwise('/');
+            $locationProvider.html5Mode(true);
       }
 
 })();

@@ -2,6 +2,6 @@
    'use strict';
 
    angular
-      .module('app', ['ui.router', 'firebase']);
+      .module('app', ['ui.router', 'firebase', 'app.landing']);
 
 })();

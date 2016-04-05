@@ -9,7 +9,7 @@ const jade = require('gulp-jade');
 gulp.task('jade', () => {
    return gulp.src('src/app/**/*.jade')
       .pipe(jade())
-      .pipe(gulp.dest('./'))
+      .pipe(gulp.dest('dist/app'))
       .pipe(browserSync.reload({
          stream: true
       }));
@@ -18,7 +18,7 @@ gulp.task('jade', () => {
 gulp.task('sass', () => {
    return gulp.src('src/app/**/*.scss')
       .pipe(sass())
-      .pipe(gulp.dest('dist/css'))
+      .pipe(gulp.dest('dist/app'))
       .pipe(browserSync.reload({
          stream: true
       }));
@@ -27,13 +27,13 @@ gulp.task('sass', () => {
 gulp.task('babel', () => {
    return gulp.src('src/app/**/*.js')
       .pipe(babel())
-      .pipe(gulp.dest('dist/js'));
+      .pipe(gulp.dest('dist/app'));
 });
 
 gulp.task('browserSync', () => {
    browserSync.init({
       server: {
-         baseDir: './'
+         baseDir: 'dist/app'
       },
    });
 });
@@ -43,5 +43,5 @@ gulp.task('default', ['jade', 'sass', 'babel']);
 gulp.task('watch', ['browserSync', 'jade', 'sass', 'babel'], () => {
    gulp.watch('src/app/**/*.scss', ['sass']);
    gulp.watch('src/app/**/*.jade', ['jade']);
-   gulp.watch('src/app/**/*.js', browserSync.reload);
+   gulp.watch('src/app/**/*.js', ['babel'], browserSync.reload);
 });
